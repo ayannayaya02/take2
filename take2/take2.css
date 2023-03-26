@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+}
+
+.temperature {
+  font-size: 50px;
+}
+
+.units {
+  font-size: 15px;
+  position: absolute;
+  padding: 10px;
+}
