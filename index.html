@@ -19,18 +19,23 @@
         <div class = "weather-app">
           <form class="search-engine" id="search-engine">
         <div class="topnav">
+          
+<input type="text"  id= "city-input" placeholder="Search..">
 
-  <input type="text"  id= "city-input" placeholder="Search..">
-    <input type="submit" value="Search" class="Search"/>
-    <input type="submit" value="Current" class="current"/>
-        </div>
+
+   <button type="button" class="btn btn-primary">Search</button>
+     <button type="button" class="btn btn-success">Current</button>
+    
+</div>
+    
+        
     <div class= "col-3">
       </div>
     <div class="col-3">
-    </br>
+    
           <h1 id="city">Miami, Florida</h1>
     <ul id="current-date"></ul>
-    <ul>Sunny</ul>
+    <ul id="weather-description"></ul>
     
  
     </div>
@@ -55,7 +60,7 @@
   <img src="https://assets.msn.com/weathermapdata/1/static/weather/Icons/taskbar_v2/Condition_Card/ClearNightV3.svg" alt="Sunny"/>
      
    <div>Precipitation:0%</div>
-        <div>Wind:<span id="Wind">MPH</div></span>
+        <div>Wind:<span id="Wind">MPH</div>
         <div> Humidity: <span id="Humidity">%</div></span>
         <br/>
         <br />
