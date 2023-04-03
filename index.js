@@ -42,8 +42,9 @@ function showWeather(response) {
 function searchCurrentLocation(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
+  let units = "metric";
   let apiKey = "79ccdab6cfa15a9b3cf2ef07cb789f4c";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeather);
 }
 
@@ -54,7 +55,7 @@ function showCurrentLocation(event) {
 
 function search(city) {
   let apiKey = "79ccdab6cfa15a9b3cf2ef07cb789f4c";
-  let units = "meteric";
+  let units = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeather);
 }
@@ -75,20 +76,11 @@ let currentTime = new Date();
 
 currentDateElement.innerHTML = formatDate(currentTime);
 
-function showFahrenheitTemperature(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (83 * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahreheitTemperature);
-}
-
 function convertToFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = "";
 }
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", convertToFahrenheit);
-fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
 
 function convertToCelsius(event) {
   event.preventDefault();
@@ -107,6 +99,9 @@ function showTemperature(response) {
   city.innerHTML = city;
   let temperatureElement = document.querySelector(temperature);
   temperatureElement.innerHTML = showTemperature;
+
+  let fahrenheitTemperature = (tempereature.innerHTML * 9) / 5 + 32;
+  temperature.innerHTML = Math.round(fahrenheitTemperature);
 }
 
 let currentButton = document.querySelector("#current-button");
