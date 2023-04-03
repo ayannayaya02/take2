@@ -75,6 +75,12 @@ let currentTime = new Date();
 
 currentDateElement.innerHTML = formatDate(currentTime);
 
+function showFahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (83 * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahreheitTemperature);
+}
+
 function convertToFahrenheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
@@ -82,6 +88,7 @@ function convertToFahrenheit(event) {
 }
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", convertToFahrenheit);
+fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
 
 function convertToCelsius(event) {
   event.preventDefault();
