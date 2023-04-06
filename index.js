@@ -14,6 +14,35 @@ function formatDate(date) {
 
   return `${day} ${hours}:${minutes}`;
 }
+function showForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Wed", "Thurs", "Fri"];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col-4">
+        <div class="weather-forecast-date"> ${day} </div>
+        <img
+          src="http://openweathermap.org/img/wn/02d@2x.png"
+          alt=""
+          width="50"
+        />
+        <div class="forecast-units">
+          <span class="forecast-fahrenheit"> 35°  </span>
+          <span class="forecast-celsius"> 10°  </span>
+        </div>
+      </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showWeather(response) {
   let iconElement = document.querySelector("#icon");
 
@@ -142,3 +171,4 @@ let celsiusTemperatureLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsiusTemperature);
 
 search("Miami");
+showForecast();
