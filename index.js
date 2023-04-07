@@ -14,26 +14,38 @@ function formatDate(date) {
 
   return `${day} ${hours}:${minutes}`;
 }
-function showForecast() {
-  let forecastElement = document.querySelector("#forecast");
 
-  let days = ["Wed", "Thurs", "Fri"];
+function formatDay(time) {
+  let date = new date(time * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+
+  return days[day];
+}
+
+function showForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  console.log(response.data.daily);
 
   let forecastHTML = `<div class="row">`;
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `
+  days.forEach(function (forecastDay) {
+    forecastHTML += forecastHTML`
       <div class="col-4">
-        <div class="weather-forecast-date"> ${day} </div>
+        <div class="weather-forecast-date"> ${formatDay(forecastDay.dt)} </div>
         <img
-          src="http://openweathermap.org/img/wn/02d@2x.png"
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
           alt=""
           width="50"
         />
         <div class="forecast-units">
-          <span class="forecast-fahrenheit"> 35°  </span>
-          <span class="forecast-celsius"> 10°  </span>
+          <span class="weather-forecast-temperature"> ${
+            forecastDay.temp.max
+          }° </span>
+          <span class="weather-forecast-temperature"> ${
+            forecastDay.temp.min
+          }°  </span>
         </div>
       </div>
   `;
@@ -41,6 +53,13 @@ function showForecast() {
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "79ccdab6cfa15a9b3cf2ef07cb789f4c";
+  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
 }
 
 function showWeather(response) {
@@ -60,6 +79,8 @@ function showWeather(response) {
     "alt",
     `https://openweathermap.org/img/wn/${response.data.weather[0].description}@2x.png`
   );
+
+  getForecast(response.data.coord);
 
   document.querySelector("#Humidity").innerHTML = response.data.main.humidity;
   document.querySelector("#Wind").innerHTML = Math.round(
